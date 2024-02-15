@@ -8,6 +8,27 @@ mkdir grading-area
 git clone $1 student-submission
 echo 'Finished cloning'
 
+if [ -f 'student-submission/ListExamples.java' ]; then
+    echo "Files Found"
+else 
+    echo "File ListExamples.java not found!"
+    exit 1
+fi 
+
+cp student-submission/ListExamples.java grading-area/
+cp TestListExamples.java grading-area/ 
+cp -r lib grading-area
+
+cd grading-area
+
+javac -cp $CPATH *.java
+
+if [$? !=0]; then
+    echo complication error 
+    exit 1
+fi
+echo program compiled successfully 
+
 
 # Draw a picture/take notes on the directory structure that's set up after
 # getting to this point
